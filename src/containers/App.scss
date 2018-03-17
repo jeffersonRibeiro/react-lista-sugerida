@@ -3,83 +3,12 @@ body {
     background-color: #F9F9F9;
 }
 
-.list-option {
-    .categoria{
-        border: 2px solid transparent;
-        transition: background-color 0.2s;
-
-        .category-title {
-            text-align: center;
-            margin-bottom: 15px;
-
-            &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-                color: rgba(0, 0, 0, 0.5);
-            }
-            &::-moz-placeholder { /* Firefox 19+ */
-                color: rgba(0, 0, 0, 0.5);
-            }
-            &:-ms-input-placeholder { /* IE 10+ */
-                color: rgba(0, 0, 0, 0.5);
-            }
-            &:-moz-placeholder { /* Firefox 18- */
-                color: rgba(0, 0, 0, 0.5);
-            }
-        }
-
-        .create-new-list {
-            color: #2c3e50;
-            box-sizing: border-box;
-            line-height: 40px;
-            position: relative;
-            border-radius: 40px;
-            width: auto;
-            padding: 0 50px;
-            margin: 0 auto;
-            margin-bottom: 20px;
-            background-color: #bdc3c7;
-
-            transition: background-color 0.2s, color 0.2s;
-
-            &:hover {
-                background-color: #34495e;
-                color: #ecf0f1;
-            }
-        }
+.react-list-block {
+    
+    .preview-mode {
 
     }
 
-    .link {
-        &:hover {
-            .config-icon {
-                visibility: visible;
-            }
-        }
-
-        .list-title {
-            &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-                color: rgba(255, 255, 255, 0.5);
-            }
-            &::-moz-placeholder { /* Firefox 19+ */
-                color: rgba(255, 255, 255, 0.5);
-            }
-            &:-ms-input-placeholder { /* IE 10+ */
-                color: rgba(255, 255, 255, 0.5);
-            }
-            &:-moz-placeholder { /* Firefox 18- */
-                color: rgba(255, 255, 255, 0.5);
-            }
-        }
-    }
-
-    .create-new-category {
-        color: #2c3e50;
-        width: 100%;
-        height: 100px;
-        background-color: #bdc3c7;
-    }
-}
-
-.wrap-buy-size-store {
     .input-change-text {
         color: inherit;
         font-size: inherit;
@@ -103,10 +32,110 @@ body {
             color: rgba(255, 255, 255, 0.5);
         }
     }
-}
 
-.edit-mode-only {
-    display: none!important;
+    .react-block {
+        .create-new-category {
+            color: #2c3e50;
+            width: 100%;
+            height: 100px;
+
+        }
+
+        .react-category {
+            &.categoria{
+                border: 2px solid transparent;
+                transition: background-color 0.2s;
+
+                &:hover{
+                    background-color: #fffffc;
+                    border: 2px solid #cacaca;
+                }
+
+                .category-title {
+                    text-align: center;
+                    margin-bottom: 15px;
+
+                    &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                        color: rgba(0, 0, 0, 0.5);
+                    }
+                    &::-moz-placeholder { /* Firefox 19+ */
+                        color: rgba(0, 0, 0, 0.5);
+                    }
+                    &:-ms-input-placeholder { /* IE 10+ */
+                        color: rgba(0, 0, 0, 0.5);
+                    }
+                    &:-moz-placeholder { /* Firefox 18- */
+                        color: rgba(0, 0, 0, 0.5);
+                    }
+                }
+
+                .create-new-list {
+                    color: #2c3e50;
+                    box-sizing: border-box;
+                    line-height: 40px;
+                    position: relative;
+                    border-radius: 40px;
+                    width: auto;
+                    padding: 0 50px;
+                    margin: 0 auto;
+                    margin-bottom: 20px;
+                    background-color: #ececec;
+
+                    transition: background-color 0.1s, color 0.1s;
+
+                    &:hover {
+                        background-color: #34495e;
+                        color: #ecf0f1;
+                    }
+                }
+
+            }
+            .react-list {
+                &.link {
+
+                    &:hover {
+                        .config-icon {
+                            visibility: visible;
+                        }
+                    }
+
+                    .no-ico {
+                        display: inline-block;
+                        background: #edf9ff;
+                        line-height: 40px;
+                        box-sizing: border-box;
+                        color: #4a90e2;
+                        border-radius: 3px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: #cceeff;
+                        }
+                    }
+
+                    .no-link {
+                        opacity: 0.6;
+                    }
+
+                    .list-title {
+                        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                            color: rgba(255, 255, 255, 0.5);
+                        }
+                        &::-moz-placeholder { /* Firefox 19+ */
+                            color: rgba(255, 255, 255, 0.5);
+                        }
+                        &:-ms-input-placeholder { /* IE 10+ */
+                            color: rgba(255, 255, 255, 0.5);
+                        }
+                        &:-moz-placeholder { /* Firefox 18- */
+                            color: rgba(255, 255, 255, 0.5);
+                        }
+                    }
+
+                }
+            }
+        }
+    }   
 }
 
 .delete-icon {
@@ -122,6 +151,7 @@ body {
     text-align: center;
     font-size: 0.8em!important;
 }
+
 .config-icon {
     position: absolute;
     top: -8px;
@@ -137,23 +167,3 @@ body {
     visibility: hidden;
 }
 
-.input-change-text {
-    &[value=""]{
-        visibility: hidden;
-    }
-}
-
-.edit-mode {
-
-    input[value=""]{
-        visibility: visible;
-    }
-
-    .categoria:hover{
-        background-color: #ffd;
-        border: 2px dashed #ddd;
-    }
-    .edit-mode-only {
-        display: block!important;
-    }
-}

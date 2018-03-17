@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Block from './Block';
+import Block from './Block/Block';
 
 
 const ListBlock = (props) => {
@@ -13,15 +13,17 @@ const ListBlock = (props) => {
                 createList={props.createList}
                 deleteList={props.deleteList}
                 editListTitle={props.editListTitle}
+                editListIcon={props.editListIcon}
+                key={block.id}
                 block={block}
             />
         )
     })
 
-    const classes = ['new-layout']
+    const classes = ['react-list-block', 'new-layout']
 
-    if (props.isEditMode)
-        classes.push('edit-mode')
+    if (props.isPreviewMode)
+        classes.push('preview-mode')
 
     return (
         <div className={classes.join(' ')}>

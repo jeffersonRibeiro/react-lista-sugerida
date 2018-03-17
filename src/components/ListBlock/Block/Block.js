@@ -1,10 +1,13 @@
 import React from 'react';
 
-import ListCategory from '../ListCategory/ListCategory';
+import ListCategory from '../../ListCategory/ListCategory';
 
 const Block = (props) => {
+    
+    const classes = ['react-block', 'wrap-buy-size-store', props.block.specialClass]
+
     return(
-        <div className={'wrap-buy-size-store ' + props.block.specialClass}>
+        <div className={classes.join(' ')}>
             <div className="list-option">
                 <div className="box">
                     <span className="ico-p">
@@ -18,9 +21,10 @@ const Block = (props) => {
                     createList={props.createList}
                     deleteList={props.deleteList}
                     editListTitle={props.editListTitle}
+                    editListIcon={props.editListIcon}
                 />
-                <button onClick={() => props.createCategory(props.block.id)} className="edit-mode-only create-new-category">
-                    Nova Categoria
+                <button onClick={() => props.createCategory(props.block.id)} className="create-new-category">
+                    <i className="fa fa-list fa-fw"></i>Criar categoria
                 </button>
             </div>
         </div>
