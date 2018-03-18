@@ -15,6 +15,12 @@ footer {
   footer .author {
     font-size: 12px; }
 
+.no-list-imported {
+  text-align: center;
+  color: #666;
+  margin-bottom: 300px;
+  margin-top: 50px; }
+
 .react-header header {
   background-color: #fff;
   box-sizing: border-box;

@@ -17,174 +17,7 @@ class ListaSugerida extends Component {
         super()
 
         this.state = {
-            listasSugerida: [{
-                id: uuid.v4(),
-                titulo: "Mais vendidos",
-                icone: 'http://i-unilever.a8e.net.br/static/images/ico-mais-vendidos.png',
-                specialClass: 'layout-blue',
-                categorias: [
-                    {
-                        id: uuid.v4(),
-                        titulo: "Cuidados Pessoais, Alimentos, Roupa e Casa",
-                        isHPF: true,
-                        listas: [
-                            {
-                                id: uuid.v4(),
-                                titulo: "20 mais vendidos",
-                                desconto: 5,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-produtos-20.png",
-                                link: "https://www-unilever-hcp.infracommerce.com.br/static/preview_unilever-listas-dos-20-produtos-mais-vendidos"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "30 mais vendidos",
-                                desconto: 7,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-produtos-30.png",
-                                link: "https://www-unilever-hcp.infracommerce.com.br/static/preview_unilever-listas-dos-30-produtos-mais-vendidos"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "40 mais vendidos",
-                                desconto: 10,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-produtos-40.png",
-                                link: "https://www-unilever-hcp.infracommerce.com.br/static/preview_unilever-listas-dos-40-produtos-mais-vendidos"
-                            }]
-                    },
-                    {
-                        id: uuid.v4(),
-                        titulo: "Roupa e Casa",
-                        listas: [
-                            {
-                                id: uuid.v4(),
-                                titulo: "20 mais vendidos",
-                                desconto: 5,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-produtos-20.png",
-                                link: "https://www-unilever-hcp.infracommerce.com.br/static/preview_unilever-listas-dos-20-produtos-mais-vendidos-roupa-casa-alimentos"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "30 mais vendidos",
-                                desconto: 7,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-produtos-30.png",
-                                link: "https://www-unilever-hcp.infracommerce.com.br/static/preview_unilever-listas-dos-30-produtos-mais-vendidos-roupa-casa-alimentos"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "40 mais vendidos",
-                                desconto: 5,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-produtos-40.png",
-                                link: "https://www-unilever-hcp.infracommerce.com.br/static/preview_unilever-listas-dos-40-produtos-mais-vendidos-roupa-casa-alimentos"
-                            }]
-                    },
-                    {
-                        id: uuid.v4(),
-                        titulo: "Cuidados Pessoais",
-                        listas: [
-                            {
-                                id: uuid.v4(),
-                                titulo: "20 mais vendidos",
-                                desconto: 5,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-produtos-20.png",
-                                link: "https://www-unilever-hcp.infracommerce.com.br/static/page_unilever-listas-dos-20-produtos-mais-vendidos-cuidados-pessoais"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "30 mais vendidos",
-                                desconto: 7,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-produtos-30.png",
-                                link: "https://www-unilever-hcp.infracommerce.com.br/static/page_unilever-listas-dos-30-produtos-mais-vendidos-cuidados-pessoais"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "40 mais vendidos",
-                                desconto: 5,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-produtos-40.png",
-                                link: "https://www-unilever-hcp.infracommerce.com.br/static/page_unilever-listas-dos-40-produtos-mais-vendidos-cuidados-pessoais"
-                            }]
-                    }],
-                oldLayout: true
-            },
-            {
-                id: uuid.v4(),
-                titulo: "Lançamentos",
-                icone: "http://i-unilever.a8e.net.br/static/images/ico-lancamentos.png",
-                specialClass: 'layout-pink',
-                categorias: [
-                    {
-                        id: uuid.v4(),
-                        titulo: "Ultimos três meses",
-                        listas: [
-                            {
-                                id: uuid.v4(),
-                                titulo: "Cuidados com Roupa e Casa",
-                                desconto: 5,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-lancamento-casa.png",
-                                link: "https://www-unilever-hcp.infracommerce.com.br/static/page_cuidados-com-a-roupa-e-com-a-casa"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "Alimentos e Chás",
-                                desconto: 5,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-lancamento-alimentos.png",
-                                link: "https://www-unilever-hcp.infracommerce.com.br/static/page_unilever-listas-alimentos-e-chas"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "Cuidados Pessoais",
-                                desconto: 5,
-                                icone: "http://i-unilever.a8e.net.br/static/images/icon-lancamento-cuidados.png",
-                                link: "https://www-unilever-dev.infracommerce.com.br/static/preview_unilever-listas-dos-20-produtos-mais-vendidos"
-                            }]
-                    }]
-            },
-            {
-                id: uuid.v4(),
-                titulo: "Recomendados",
-                icone: 'http://i-unilever.a8e.net.br/static/images/ico-recomendados.png',
-                specialClass: 'layout-blue',
-                categorias: [
-                    {
-                        id: uuid.v4(),
-                        titulo: "Sortimento Prioritário",
-                        listas: [
-                            {
-                                id: uuid.v4(),
-                                titulo: "Cuidados com a Roupa",
-                                desconto: 5,
-                                link: "https://www-unilever-dev.infracommerce.com.br/static/preview_unilever-listas-dos-20-produtos-mais-vendidos"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "Cuidados com a Roupa",
-                                desconto: 15,
-                                link: "https://www-unilever-dev.infracommerce.com.br/static/preview_unilever-listas-dos-20-produtos-mais-vendidos"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "Temperos e Caldos",
-                                desconto: 10,
-                                link: "https://www-unilever-dev.infracommerce.com.br/static/preview_unilever-listas-dos-20-produtos-mais-vendidos"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "Cuidados com o Cabelo",
-                                link: "https://www-unilever-dev.infracommerce.com.br/static/preview_unilever-listas-dos-20-produtos-mais-vendidos"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "Desodorantes",
-                                desconto: 20,
-                                link: "https://www-unilever-dev.infracommerce.com.br/static/preview_unilever-listas-dos-20-produtos-mais-vendidos"
-                            },
-                            {
-                                id: uuid.v4(),
-                                titulo: "Desodorantes",
-                                desconto: 20,
-                                link: "https://www-unilever-dev.infracommerce.com.br/static/preview_unilever-listas-dos-20-produtos-mais-vendidos"
-                            }
-                        ]
-                    }]
-            }],
+            listasSugerida: [],
             changes: [],
             isPreviewMode: false,
             modal: {
@@ -249,7 +82,7 @@ class ListaSugerida extends Component {
     }
 
     registerChange(data, message){
-        const limit = 5;
+        const limit = 10;
         const changes = [...this.state.changes]
 
         if(changes.length === limit)
@@ -259,7 +92,6 @@ class ListaSugerida extends Component {
 
         this.setState({changes});
 
-        console.log(changes);
     }
 
     togglePreviewMode() {
@@ -548,6 +380,10 @@ class ListaSugerida extends Component {
                     onClickList={this.onClickList}
                     isPreviewMode={this.state.isPreviewMode}
                 />
+
+                {!this.state.listasSugerida.length &&
+                    <p className="no-list-imported">Clique em "Import" para importar o JSON da lista sugerida</p>
+                }
 
                 <Footer/>
 
