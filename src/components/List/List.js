@@ -24,7 +24,7 @@ const List = (props) => {
                     </span>
                 }
                 <i onClick={() => props.deleteList(props.lista.id)} className="delete-icon fa fa-times"></i>
-                <i onClick={() => props.editListLink(props.lista.id)} className="config-icon fa fa-link"></i>
+                <i onClick={() => props.editListLink(props.lista.id)} className="config-icon fa fa-wrench"></i>
             </a>
         </div>
     )

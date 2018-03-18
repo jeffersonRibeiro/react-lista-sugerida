@@ -2,7 +2,7 @@ import React,  { Component } from 'react';
 import ReactModal from 'react-modal';
 import uuid from 'uuid';
 
-import ConfigPanel      from './ConfigPanel';
+import Header      from './Header';
 import ListBlock        from './ListBlock/ListBlock';
 import ModalListConfig    from './List/Modal/ListConfig';
 
@@ -186,6 +186,9 @@ class ListaSugerida extends Component {
                 showModal: false,
                 modalContent: null,
                 styles: {
+                    overlay: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.75)'
+                    },
                     content: {
                         top: '50%',
                         left: '50%',
@@ -398,12 +401,11 @@ class ListaSugerida extends Component {
                 <ReactModal
                     isOpen={this.state.modal.showModal}
                     style={this.state.modal.styles}
-                    contentLabel="Minimal Modal Example"
                 >
                 {this.state.modal.content}
                 </ReactModal>
 
-                <ConfigPanel
+                <Header
                     togglePreviewMode={this.togglePreviewMode}
                     isPreviewMode={this.state.isPreviewMode}
                     printListaSugerida={this.printListaSugerida}

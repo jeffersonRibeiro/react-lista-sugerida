@@ -1,6 +1,35 @@
 body {
   background-color: #F9F9F9; }
 
+.App {
+  margin-top: 0px; }
+
+.react-header header {
+  background-color: #fff;
+  box-sizing: border-box;
+  height: 70px;
+  padding: 0px 20px; }
+
+.react-header .banner-lists {
+  margin-bottom: 20px;
+  height: 160px !important; }
+  .react-header .banner-lists .title-list {
+    margin-top: 42px !important;
+    font-size: 40px !important; }
+  .react-header .banner-lists .desc-list {
+    font-size: 24px !important; }
+
+.react-header .logo {
+  float: left;
+  height: 80px;
+  margin-top: -15px; }
+
+.react-header .header-config {
+  padding: 10px;
+  box-sizing: border-box;
+  width: calc(100% - 229px);
+  float: left; }
+
 .react-list-block .input-change-text {
   color: inherit;
   font-size: inherit;
@@ -192,3 +221,30 @@ body {
   text-align: center;
   font-size: 0.8em !important;
   visibility: hidden; }
+
+.clearfix {
+  clear: both; }
+
+.ReactModal__Content {
+  opacity: 0; }
+
+.ReactModal__Content--after-open {
+  opacity: 1;
+  transition: opacity 150ms; }
+
+.ReactModal__Content--before-close {
+  opacity: 0; }
+
+.example-enter {
+  opacity: 0.01; }
+
+.example-enter.example-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in; }
+
+.example-leave {
+  opacity: 1; }
+
+.example-leave.example-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in; }
