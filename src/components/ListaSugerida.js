@@ -82,7 +82,7 @@ class ListaSugerida extends Component {
     }
 
     registerChange(data, message){
-        const limit = 10;
+        const limit = 5;
         const changes = [...this.state.changes]
 
         if(changes.length === limit)
