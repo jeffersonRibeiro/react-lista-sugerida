@@ -16,10 +16,10 @@ const Header = (props) => (
         </ul>
 
         <div className="header-tools">
-            <div className="tool first"><i className="fa fa-undo"></i><p>Undo</p></div>
+            <div onClick={props.undo} className={props.hasUndo ? 'tool' : 'tool disabled'}><i className="fa fa-undo"></i><p>Undo</p></div>
             <div onClick={props.togglePreviewMode} className={props.isPreviewMode ? 'tool preview-active' : 'tool'}><i className="fa fa-eye"></i><p>Preview</p></div>
             <div onClick={props.importListaSugerida} className="tool"><i className="fa fa-code"></i><p>Import</p></div>
-            <div onClick={props.exportListaSugerida} className="tool last"><i className="fa fa-save"></i><p>Export</p></div>
+            <div onClick={props.exportListaSugerida} className="tool"><i className="fa fa-save"></i><p>Export</p></div>
 
             <div className="clearfix"></div>
         </div>

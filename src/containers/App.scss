@@ -83,6 +83,18 @@ footer{
                 }
             }
 
+            &.disabled {
+                background-color: #ededed;
+                color: rgba(0, 0, 0, 0.4);
+                opacity: 0.5;
+                cursor: default;
+
+                &:hover {
+                    background-color: #ededed;
+                    color: rgba(0, 0, 0, 0.4);
+                }
+            }
+
             p {
                 font-family: Verdana;
                 font-size: 10px;
@@ -117,6 +129,12 @@ footer{
             &:hover{
                 background-color: #fff!important;
                 border: 2px solid transparent!important;
+            }
+        }
+
+        .link {
+            .list-title {
+                cursor: pointer;
             }
         }
     }

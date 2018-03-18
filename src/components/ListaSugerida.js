@@ -185,7 +185,8 @@ class ListaSugerida extends Component {
                         ]
                     }]
             }],
-            isPreviewMode: true,
+            changes: [],
+            isPreviewMode: false,
             modal: {
                 showModal: false,
                 modalContent: null,
@@ -206,10 +207,12 @@ class ListaSugerida extends Component {
         }
 
         /* General */
-        this.handleCloseModal     = this.handleCloseModal.bind(this);
-        this.togglePreviewMode    = this.togglePreviewMode.bind(this)
+        this.registerChange        = this.registerChange.bind(this)
+        this.handleCloseModal      = this.handleCloseModal.bind(this)
+        this.togglePreviewMode     = this.togglePreviewMode.bind(this)
         this.exportListaSugerida   = this.exportListaSugerida.bind(this)
         this.importListaSugerida   = this.importListaSugerida.bind(this)
+        this.undo                  = this.undo.bind(this)
 
         /* Block */
         this.changeBlockColor     = this.changeBlockColor.bind(this);
@@ -228,6 +231,44 @@ class ListaSugerida extends Component {
 
     }
 
+    undo(){
+        let listasSugerida = [...this.state.listasSugerida],
+            changes = [...this.state.changes]
+        
+
+        if(!changes.length)
+            return false
+        
+        console.log('before', listasSugerida);
+        console.log('changesIndex', changes[changes.length - 1].data);
+
+        listasSugerida = changes[changes.length -1].data
+        
+        changes.pop();
+
+        console.log('after', listasSugerida);
+
+        console.log('changes', changes);
+
+        this.setState({listasSugerida, changes})
+
+
+    }
+
+    registerChange(data, message){
+        const limit = 5;
+        const changes = [...this.state.changes]
+
+        if(changes.length === limit)
+            changes.shift();
+        
+        changes.push({data, message})
+
+        this.setState({changes});
+
+        console.log(changes);
+    }
+
     togglePreviewMode() {
         this.setState(prevState => ({
             isPreviewMode: !prevState.isPreviewMode
@@ -243,6 +284,7 @@ class ListaSugerida extends Component {
 
             const imported = JSON.parse(form.textarea.value)
 
+            
             imported.forEach(b => {
                 b.id = uuid.v4()
                 b.categorias.forEach(c => {
@@ -253,7 +295,11 @@ class ListaSugerida extends Component {
                 })
             })
 
+            this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Lista importada')
+            
             modal.showModal = false
+
+            
 
             this.setState({listasSugerida: imported, modal})
 
@@ -323,10 +369,13 @@ class ListaSugerida extends Component {
                 })
             })
         })
-
+        
         const handleSubmit = (e, form) => {
             e.preventDefault()
 
+
+            this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Lista editada')
+            
             lista.link = form.listLink.value;
             lista.icone = form.listIconLink.value;
             lista.desconto = form.listDiscount.value;
@@ -346,12 +395,14 @@ class ListaSugerida extends Component {
         )
 
         modal.showModal = true;
+
         
         this.setState({modal})
     }
 
     editListTitle(e, _id) {
-        if(!this.state.isPreviewMode)
+
+        if(this.state.isPreviewMode)
             return false
         
         let listasSugerida = [...this.state.listasSugerida];
@@ -370,11 +421,14 @@ class ListaSugerida extends Component {
     }
     
     deleteList(_id) {
-        if (!this.state.isPreviewMode)
+        if (this.state.isPreviewMode)
             return false
-
+        
             
         let listasSugerida = [...this.state.listasSugerida];
+
+        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Lista deletada')
+        
         listasSugerida.forEach(b => {
             b.categorias.forEach(c => {
                 let i = c.listas.findIndex(l => l.id === _id);
@@ -383,6 +437,7 @@ class ListaSugerida extends Component {
                 }
             })
         })
+        
 
         this.setState({listasSugerida})
     }
@@ -394,6 +449,8 @@ class ListaSugerida extends Component {
             link: ""
         }
 
+        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Lista criada')
+        
         let listasSugerida = this.state.listasSugerida;
         listasSugerida.forEach( b => {
             b.categorias.forEach( c => {
@@ -402,25 +459,28 @@ class ListaSugerida extends Component {
                 }
             })
         } )
+        
 
         this.setState({listasSugerida})
     }
 
     onClickList(e){
-        // if(!this.state.isPreviewMode){
-            // console.log('nao preview');
+        if(!this.state.isPreviewMode){
             e.preventDefault();
-        // }
-
+        }
     }
 
     deleteCategory(_id){
-        const listasSugerida = this.state.listasSugerida;
+        const listasSugerida = [...this.state.listasSugerida];
+        
+        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Categoria deletada')
+
         listasSugerida.forEach(l => {
             let i = l.categorias.findIndex(c => c.id === _id);
             if (i >= 0)
                 l.categorias.splice(i, 1);
         })
+
 
         this.setState({ listasSugerida })
     }
@@ -432,17 +492,21 @@ class ListaSugerida extends Component {
             listas: []
         }
 
-        const listasSugerida = this.state.listasSugerida;
+        const listasSugerida = [...this.state.listasSugerida];
+
+        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Categoria Criada')
+
         listasSugerida.forEach( l => {
             if(l.id === _id)
                 l.categorias.push(newCategory)
         })
 
+
         this.setState({listasSugerida})
     }
 
     editCategoryTitle(e, _id){
-         if(!this.state.isPreviewMode)
+         if(this.state.isPreviewMode)
             return false;
         
         let listasSugerida = this.state.listasSugerida;
@@ -470,6 +534,8 @@ class ListaSugerida extends Component {
                 </ReactModal>
 
                 <Header
+                    undo={this.undo}
+                    hasUndo={!!this.state.changes.length}
                     togglePreviewMode={this.togglePreviewMode}
                     isPreviewMode={this.state.isPreviewMode}
                     importListaSugerida={this.importListaSugerida}
