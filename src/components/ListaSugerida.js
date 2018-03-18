@@ -238,17 +238,10 @@ class ListaSugerida extends Component {
 
         if(!changes.length)
             return false
-        
-        console.log('before', listasSugerida);
-        console.log('changesIndex', changes[changes.length - 1].data);
 
         listasSugerida = changes[changes.length -1].data
         
         changes.pop();
-
-        console.log('after', listasSugerida);
-
-        console.log('changes', changes);
 
         this.setState({listasSugerida, changes})
 
