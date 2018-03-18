@@ -13,7 +13,7 @@ const ListBlock = (props) => {
                 createList={props.createList}
                 deleteList={props.deleteList}
                 editListTitle={props.editListTitle}
-                editListIcon={props.editListIcon}
+                editListLink={props.editListLink}
                 key={block.id}
                 block={block}
             />

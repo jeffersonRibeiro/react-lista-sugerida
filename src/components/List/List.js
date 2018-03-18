@@ -15,10 +15,10 @@ const List = (props) => {
                 <img className="lista-ico" src={props.lista.icone} alt={props.lista.titulo} />
             }
             {!props.lista.icone &&
-                <i onClick={props.editListIcon} className="lista-ico no-ico fa fa-photo"></i>
+                <i className="lista-ico no-ico fa fa-photo"></i>
             }
             
-            <a onClick={(e) => e.preventDefault()} href={props.lista.link} draggable="false" className={props.lista.link === '' ? 'no-link' : ''}>
+            <a onClick={(e) => e.preventDefault()} href={props.lista.link} title={props.lista.link} draggable="false" className={props.lista.link === '' ? 'no-link' : ''}>
                 <input onChange={(e) => props.editListTitle(e, props.lista.id)} maxLength={options.titleMaxLength} placeholder={options.titlePlaceholder} className="list-title input-change-text" type="text" value={props.lista.titulo}/>
                 {props.lista.desconto &&
                     <span className="lista-desconto">{props.lista.desconto}%
@@ -27,7 +27,7 @@ const List = (props) => {
                     </span>
                 }
                 <i onClick={() => props.deleteList(props.lista.id)} className="delete-icon fa fa-times"></i>
-                <i className="config-icon fa fa-link"></i>
+                <i onClick={() => props.editListLink(props.lista.id)} className="config-icon fa fa-link"></i>
             </a>
         </div>
     )

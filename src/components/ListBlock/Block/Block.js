@@ -21,7 +21,7 @@ const Block = (props) => {
                     createList={props.createList}
                     deleteList={props.deleteList}
                     editListTitle={props.editListTitle}
-                    editListIcon={props.editListIcon}
+                    editListLink={props.editListLink}
                 />
                 <button onClick={() => props.createCategory(props.block.id)} className="create-new-category">
                     <i className="fa fa-list fa-fw"></i>Criar categoria

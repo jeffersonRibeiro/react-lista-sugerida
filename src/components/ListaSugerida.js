@@ -2,8 +2,9 @@ import React,  { Component } from 'react';
 import ReactModal from 'react-modal';
 import uuid from 'uuid';
 
-import ConfigPanel from './ConfigPanel';
-import ListBlock from './ListBlock/ListBlock';
+import ConfigPanel      from './ConfigPanel';
+import ListBlock        from './ListBlock/ListBlock';
+import ModalListLink    from './List/Modal/ListLink';
 
 ReactModal.setAppElement(document.getElementById('root'))
 
@@ -198,19 +199,19 @@ class ListaSugerida extends Component {
         }
 
         /* General */
-        this.handleCloseModal   = this.handleCloseModal.bind(this);
-        this.togglePreviewMode  = this.togglePreviewMode.bind(this)
-        this.printListaSugerida = this.printListaSugerida.bind(this)
+        this.handleCloseModal     = this.handleCloseModal.bind(this);
+        this.togglePreviewMode    = this.togglePreviewMode.bind(this)
+        this.printListaSugerida   = this.printListaSugerida.bind(this)
         
         /* Category */
-        this.createCategory     = this.createCategory.bind(this)
-        this.editCategoryTitle  = this.editCategoryTitle.bind(this)
+        this.createCategory       = this.createCategory.bind(this)
+        this.editCategoryTitle    = this.editCategoryTitle.bind(this)
         
         /* List */
-        this.createList         = this.createList.bind(this)
-        this.deleteList         = this.deleteList.bind(this)
-        this.editListTitle      = this.editListTitle.bind(this)
-        this.editListIcon       = this.editListIcon.bind(this)
+        this.createList           = this.createList.bind(this)
+        this.deleteList           = this.deleteList.bind(this)
+        this.editListTitle        = this.editListTitle.bind(this)
+        this.editListLink         = this.editListLink.bind(this)
 
     }
 
@@ -231,22 +232,43 @@ class ListaSugerida extends Component {
         this.setState({modal})
     }
 
-    editListIcon() {
-        const modal = {...this.state.modal}
-        modal.content = (
-            <div>
-              <p>Insira o link da lista</p>
-              <input type="text" placeholder="http://www.example.com"/>
-              <input type="submit" value="ok"/>
+    editListLink(_id) {
+        const listasSugerida = [...this.state.listasSugerida],
+              modal = {...this.state.modal}
+        
+        let lista = {}
 
-              <button onClick={this.handleCloseModal}>close</button>
-            </div>
+        listasSugerida.forEach(b => {
+            b.categorias.forEach(c => {
+                c.listas.forEach(l => {
+                    if (l.id === _id)
+                        lista = l
+                })
+            })
+        })
+
+        const handleSubmit = (e, link) => {
+            e.preventDefault()
+
+            lista.link = link
+
+            modal.showModal = false;
+
+            this.setState({ listasSugerida, modal })
+        }
+
+
+
+        modal.content = (
+            <ModalListLink
+                onSubmit={handleSubmit}
+                lista={lista}
+            />
         )
 
         modal.showModal = true;
         
         this.setState({modal})
-        
     }
 
     editListTitle(e, _id) {
@@ -364,7 +386,7 @@ class ListaSugerida extends Component {
                     createList={this.createList}
                     deleteList={this.deleteList}
                     editListTitle={this.editListTitle}
-                    editListIcon={this.editListIcon}
+                    editListLink={this.editListLink}
                     isPreviewMode={this.state.isPreviewMode}
                 />
                 

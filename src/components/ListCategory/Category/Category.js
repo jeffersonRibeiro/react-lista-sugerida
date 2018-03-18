@@ -16,7 +16,7 @@ const Category = (props) => {
             <List
             deleteList={props.deleteList}
             editListTitle={props.editListTitle}
-            editListIcon={props.editListIcon}
+            editListLink={props.editListLink}
             key={l.id}
             lista={l}
             />

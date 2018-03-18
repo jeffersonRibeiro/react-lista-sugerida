@@ -9,7 +9,7 @@ const ListCategory = (props) => props.categories.map( c => {
             createList={props.createList}
             deleteList={props.deleteList}
             editListTitle={props.editListTitle}
-            editListIcon={props.editListIcon}
+            editListLink={props.editListLink}
             key={c.id}
             category={c}
         />
