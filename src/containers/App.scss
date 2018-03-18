@@ -34,6 +34,29 @@ body {
     }
 
     .react-block {
+        position: relative;
+
+        &:hover {
+            .change-block-color {
+                position: absolute;
+                top: 0;
+                right: 15px;
+                padding: 10px;
+                color: #2c3e50;
+                background-color: #ececec;
+                display: block;
+
+                &:hover {
+                    background-color: #e5e5e5
+                }
+            }
+        }
+
+        .change-block-color {
+            cursor: pointer;
+            display: none;
+        }
+
         .create-new-category {
             color: #2c3e50;
             width: 100%;
@@ -92,6 +115,15 @@ body {
             }
             .react-list {
                 &.link {
+                    a {
+                        transition: all 0.4s;
+                    }
+
+                    &[data-hasdiscount="false"]{
+                        .list-title {
+                            text-align: center;
+                        }
+                    }
 
                     &:hover {
                         .config-icon {
@@ -107,14 +139,10 @@ body {
                         color: #4a90e2;
                         border-radius: 3px;
                         cursor: pointer;
-
-                        &:hover {
-                            background-color: #cceeff;
-                        }
                     }
 
                     .no-link {
-                        opacity: 0.6;
+                        background-color: #d0d0d0!important;
                     }
 
                     .list-title {
@@ -136,6 +164,75 @@ body {
             }
         }
     }   
+}
+
+.modal {
+    padding: 0px;
+
+    &.modal-list-config {
+        width: 400px;
+        padding: 20px 0;
+
+        .modal-title {
+            margin-bottom: 14px;
+            font-weight: bold;
+        }
+
+        label {
+            width: 100%;
+            margin-top: 15px;
+            text-align: left;
+            box-sizing: border-box;
+            padding-right: 0px;
+
+            &.list-discount {
+                width: 25%;
+            }
+
+            &.list-ico {
+                width: 75%;
+            }
+        }
+
+        .list-input {
+            display: block;
+            width: 100%;
+            padding: 20px 10px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            border: 0px;
+            color: #2c3e50;
+            padding: 10px 32px;
+            border-radius: 5px;
+            margin-top: 20px;
+            background-color: #ececec;
+            
+            transition: background-color 0.1s, color 0.1s;
+
+            &:hover {
+                background-color: #34495e;
+                color: #ecf0f1;
+            }
+
+        }
+
+        .close-modal {
+            color: #aaa;
+            background-color: transparent;
+            padding: 10px 15px;
+            position: absolute;
+            top: 0;
+            right: 0;
+
+            &:hover {
+                background-color: #eee;
+                color: #888;
+            }
+        }
+    }
 }
 
 .delete-icon {

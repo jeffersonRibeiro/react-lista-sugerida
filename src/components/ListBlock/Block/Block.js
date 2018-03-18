@@ -8,6 +8,8 @@ const Block = (props) => {
 
     return(
         <div className={classes.join(' ')}>
+            <i onClick={() => props.changeBlockColor(props.block.id)} className="fa fa-paint-brush change-block-color"></i>
+
             <div className="list-option">
                 <div className="box">
                     <span className="ico-p">

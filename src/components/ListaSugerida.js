@@ -4,7 +4,7 @@ import uuid from 'uuid';
 
 import ConfigPanel      from './ConfigPanel';
 import ListBlock        from './ListBlock/ListBlock';
-import ModalListLink    from './List/Modal/ListLink';
+import ModalListConfig    from './List/Modal/ListConfig';
 
 ReactModal.setAppElement(document.getElementById('root'))
 
@@ -202,6 +202,9 @@ class ListaSugerida extends Component {
         this.handleCloseModal     = this.handleCloseModal.bind(this);
         this.togglePreviewMode    = this.togglePreviewMode.bind(this)
         this.printListaSugerida   = this.printListaSugerida.bind(this)
+
+        /* Block */
+        this.changeBlockColor     = this.changeBlockColor.bind(this);
         
         /* Category */
         this.createCategory       = this.createCategory.bind(this)
@@ -232,6 +235,20 @@ class ListaSugerida extends Component {
         this.setState({modal})
     }
 
+    changeBlockColor(_id){
+        const colors = ['layout-pink', 'layout-blue'];
+        const listasSugerida = [...this.state.listasSugerida];
+
+        listasSugerida.forEach(b => {
+            if(b.id === _id){
+                const idx = colors.findIndex((c) => c === b.specialClass)
+                b.specialClass = (idx === colors.length -1) ? colors[0] : colors[idx + 1]
+            }
+        })
+
+        this.setState({listasSugerida})
+    }
+
     editListLink(_id) {
         const listasSugerida = [...this.state.listasSugerida],
               modal = {...this.state.modal}
@@ -247,10 +264,12 @@ class ListaSugerida extends Component {
             })
         })
 
-        const handleSubmit = (e, link) => {
+        const handleSubmit = (e, form) => {
             e.preventDefault()
 
-            lista.link = link
+            lista.link = form.listLink.value;
+            lista.icone = form.listIconLink.value;
+            lista.desconto = form.listDiscount.value;
 
             modal.showModal = false;
 
@@ -260,7 +279,7 @@ class ListaSugerida extends Component {
 
 
         modal.content = (
-            <ModalListLink
+            <ModalListConfig
                 onSubmit={handleSubmit}
                 lista={lista}
             />
@@ -312,7 +331,6 @@ class ListaSugerida extends Component {
         const newList = {
             id: uuid.v4(),
             titulo: "",
-            desconto: 5,
             link: ""
         }
 
@@ -381,6 +399,7 @@ class ListaSugerida extends Component {
 
                 <ListBlock
                     listasSugerida={this.state.listasSugerida}
+                    changeBlockColor={this.changeBlockColor}                    
                     createCategory={this.createCategory}
                     editCategoryTitle={this.editCategoryTitle}
                     createList={this.createList}

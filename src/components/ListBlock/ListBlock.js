@@ -8,6 +8,7 @@ const ListBlock = (props) => {
     const lb = props.listasSugerida.map(block => {
         return (
             <Block
+                changeBlockColor={props.changeBlockColor}
                 createCategory={props.createCategory}
                 editCategoryTitle={props.editCategoryTitle}
                 createList={props.createList}
