@@ -2,9 +2,13 @@ import React,  { Component } from 'react';
 import ReactModal from 'react-modal';
 import uuid from 'uuid';
 
-import Header      from './Header';
-import ListBlock        from './ListBlock/ListBlock';
-import ModalListConfig    from './List/Modal/ListConfig';
+import Header from './Header/Header';
+import Footer from './Footer/Footer';     
+import ListBlock from './ListBlock/ListBlock';
+import ModalListConfig from './List/Modal/ModalListConfig';
+import ModalExport from './Header/ModalExport';
+import ModalImport from './Header/ModalImport';
+
 
 ReactModal.setAppElement(document.getElementById('root'))
 
@@ -204,7 +208,8 @@ class ListaSugerida extends Component {
         /* General */
         this.handleCloseModal     = this.handleCloseModal.bind(this);
         this.togglePreviewMode    = this.togglePreviewMode.bind(this)
-        this.printListaSugerida   = this.printListaSugerida.bind(this)
+        this.exportListaSugerida   = this.exportListaSugerida.bind(this)
+        this.importListaSugerida   = this.importListaSugerida.bind(this)
 
         /* Block */
         this.changeBlockColor     = this.changeBlockColor.bind(this);
@@ -218,7 +223,8 @@ class ListaSugerida extends Component {
         this.createList           = this.createList.bind(this)
         this.deleteList           = this.deleteList.bind(this)
         this.editListTitle        = this.editListTitle.bind(this)
-        this.editListLink         = this.editListLink.bind(this)
+        this.editList             = this.editList.bind(this)
+        this.onClickList          = this.onClickList.bind(this)
 
     }
 
@@ -228,12 +234,62 @@ class ListaSugerida extends Component {
         }));
     }
 
-    printListaSugerida() {
-        console.log(JSON.stringify(this.state.listasSugerida, null, 2));
+    importListaSugerida() {
+        const modal = {...this.state.modal}
+
+
+        const handleSubmit = (e, form) => {
+            e.preventDefault()
+
+            const imported = JSON.parse(form.textarea.value)
+
+            imported.forEach(b => {
+                b.id = uuid.v4()
+                b.categorias.forEach(c => {
+                    c.id = uuid.v4()
+                    c.listas.forEach(l => {
+                        l.id = uuid.v4()
+                    })
+                })
+            })
+
+            modal.showModal = false
+
+            this.setState({listasSugerida: imported, modal})
+
+        }
+
+        modal.content = (
+            <ModalImport
+                onSubmit={handleSubmit}
+                closeModal={this.handleCloseModal}
+            />
+        )
+
+        modal.showModal = true
+
+        this.setState({ modal })
+
+    }
+
+    exportListaSugerida() {
+        const modal = {...this.state.modal}
+
+        modal.content = (
+            <ModalExport
+                ls={JSON.stringify(this.state.listasSugerida, null, 2)}
+                closeModal={this.handleCloseModal}
+            />
+        )
+
+        modal.showModal = true
+
+        this.setState({modal})
     }
 
     handleCloseModal() {
         const modal = {...this.state.modal}
+
         modal.showModal = false
 
         this.setState({modal})
@@ -253,7 +309,7 @@ class ListaSugerida extends Component {
         this.setState({listasSugerida})
     }
 
-    editListLink(_id) {
+    editList(_id) {
         const listasSugerida = [...this.state.listasSugerida],
               modal = {...this.state.modal}
         
@@ -350,6 +406,14 @@ class ListaSugerida extends Component {
         this.setState({listasSugerida})
     }
 
+    onClickList(e){
+        // if(!this.state.isPreviewMode){
+            // console.log('nao preview');
+            e.preventDefault();
+        // }
+
+    }
+
     deleteCategory(_id){
         const listasSugerida = this.state.listasSugerida;
         listasSugerida.forEach(l => {
@@ -408,7 +472,8 @@ class ListaSugerida extends Component {
                 <Header
                     togglePreviewMode={this.togglePreviewMode}
                     isPreviewMode={this.state.isPreviewMode}
-                    printListaSugerida={this.printListaSugerida}
+                    importListaSugerida={this.importListaSugerida}
+                    exportListaSugerida={this.exportListaSugerida}
                 />
 
                 <ListBlock
@@ -420,10 +485,12 @@ class ListaSugerida extends Component {
                     createList={this.createList}
                     deleteList={this.deleteList}
                     editListTitle={this.editListTitle}
-                    editListLink={this.editListLink}
+                    editList={this.editList}
+                    onClickList={this.onClickList}
                     isPreviewMode={this.state.isPreviewMode}
                 />
-                
+
+                <Footer/>
 
             </div>
         )

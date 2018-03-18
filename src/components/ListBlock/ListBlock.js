@@ -15,7 +15,8 @@ const ListBlock = (props) => {
                 createList={props.createList}
                 deleteList={props.deleteList}
                 editListTitle={props.editListTitle}
-                editListLink={props.editListLink}
+                editList={props.editList}
+                onClickList={props.onClickList}
                 key={block.id}
                 block={block}
             />

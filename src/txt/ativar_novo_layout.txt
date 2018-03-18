@@ -1,0 +1,113 @@
+var isHPF = arrayContainsArray( window.warehouseListSize, list_hpf );
+
+function renderNewLayout(data){
+		countListSize();
+
+		var template = '\
+			<div class="new-layout">\
+			   {{#each this}}\
+			   <div class="wrap-buy-size-store {{this.specialClass}} {{#gt this.listSize 3}}collapsed{{/gt}}">\
+			      <div class="list-option">\
+			         <div class="box"><span class="ico-p"> <img src="{{this.icone}}" alt="{{this.titulo}}"> </span></div>\
+			         <h3 class="title">{{this.titulo}}</h3>\
+		         	 {{#each this.categorias}}\
+		         	 <div class="categoria" data-isHPF="{{this.isHPF}}">\
+			         	 <p class="categoria-title">{{this.titulo}}</p>\
+			         	 <div class="single-deliver show">\
+			         	 	{{#each this.listas}}\
+			         	    	<div class="link" {{#if this.desconto includeZero=false}}data-hasdiscount="true"{{/if}}>\
+			         	    		{{#if this.icone includeZero=false}}\
+			         	    			<img class="lista-ico" src="{{this.icone}}"/>\
+			         	    		{{/if}}\
+			         	    		<a href="{{this.link}}">{{this.titulo}}\
+			         	    			{{#if this.desconto includeZero=false}}\
+			         	    				<span class="lista-desconto">{{this.desconto}}% <br/>\
+			         	    					<span>Off</span>\
+			         	    				</span>\
+			         	    			{{/if}}\
+			         	    		</a>\
+			         	    	</div>\
+			         	 	{{/each}}\
+			         	 </div>\
+		         	 </div>\
+		         	 {{/each}}\
+			      </div>\
+			      <div class="more">Ver mais listas</div>\
+			   </div>\
+			   {{/each}}\
+			   <div class="clear"></div>\
+			</div>\
+		';
+
+		var h = Handlebars.compile(template);
+
+		$('.container-buy-size-store').html( h(data) );
+		defineHPFLayout();
+
+		$('.container-buy-size-store .more').click(function(){
+			$(this).parent().removeClass('collapsed');
+		});
+
+	}
+
+function defineHPFLayout(){
+		
+		if (isHPF === true) {
+			$(".wrap-buy-size-store [data-ishpf=true]").show();
+
+			/* 
+				Se for o layout novo, remover todos as listas adjacentes a lista hpf. Se for o layout
+				antigo, remover todas as listas não hpf
+			*/
+			if(isNewlayout){
+				$(".wrap-buy-size-store [data-ishpf=true] ~ .categoria").remove();
+			}else{
+				$(".wrap-buy-size-store [data-ishpf=]").remove();
+			}
+		}else {
+			$(".wrap-buy-size-store [data-ishpf=true]").remove();
+			$(".wrap-buy-size-store [data-ishpf=]").show();
+		}
+	}
+
+	function countListSize(){
+		for(var i = 0; i < listaSugerida.length; i++){
+			var l = listaSugerida[i],
+				s = 0,
+				hpfSize = 0;
+
+			for(var j = 0; j < l.categorias.length; j++){
+				/*Contas o tamanhos das listas hpf e as não hpf*/
+				if(l.categorias[j].isHPF){
+					hpfSize += l.categorias[j].listas.length;
+				}else{
+					s += l.categorias[j].listas.length;
+				}
+			}
+
+			/* Atribui ao container principal a quantidade de listas renderizadas*/
+			if (isHPF && hpfSize > 0){
+				l.listSize = hpfSize;
+			}else{
+				l.listSize = s;
+			}
+		}
+	}
+	
+
+	/**
+	* Retorna true se qualquer warehouse exister dentro do array HPF
+	*
+	* @param {array} warehouse
+	* @param {array} hpf
+	*
+	* @returns {boolean}
+	*/
+	function arrayContainsArray (array1, array2) {
+	    var contains = false;
+	    $.each(array1, function( index, value ) {
+	        contains = contains || ( $.inArray( value, array2 ) >= 0 );
+	    });
+	    return contains;
+	}
+

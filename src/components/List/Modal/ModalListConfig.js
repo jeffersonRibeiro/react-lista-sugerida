@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
-class ListConfig extends Component {
+class ModalListConfig extends Component {
     constructor(props){
         super(props);
 
         this.form = {}
+
     }
 
     componentDidMount() {
@@ -38,4 +39,4 @@ class ListConfig extends Component {
 
 }
 
-export default ListConfig;
+export default ModalListConfig;
