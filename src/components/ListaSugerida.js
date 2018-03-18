@@ -95,6 +95,9 @@ class ListaSugerida extends Component {
     }
 
     togglePreviewMode() {
+        if(!this.state.listasSugerida.length)
+            return false
+        
         this.setState(prevState => ({
             isPreviewMode: !prevState.isPreviewMode
         }));
@@ -144,6 +147,9 @@ class ListaSugerida extends Component {
     }
 
     exportListaSugerida() {
+        if(!this.state.listasSugerida.length)
+            return false
+
         const modal = {...this.state.modal}
 
         modal.content = (
@@ -361,6 +367,7 @@ class ListaSugerida extends Component {
                 <Header
                     undo={this.undo}
                     hasUndo={!!this.state.changes.length}
+                    hasList={!!this.state.listasSugerida.length}
                     togglePreviewMode={this.togglePreviewMode}
                     isPreviewMode={this.state.isPreviewMode}
                     importListaSugerida={this.importListaSugerida}
@@ -380,10 +387,6 @@ class ListaSugerida extends Component {
                     onClickList={this.onClickList}
                     isPreviewMode={this.state.isPreviewMode}
                 />
-
-                {!this.state.listasSugerida.length &&
-                    <p className="no-list-imported">Clique em "Import" para importar o JSON da lista sugerida</p>
-                }
 
                 <Footer/>
 
