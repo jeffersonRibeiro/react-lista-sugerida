@@ -28,6 +28,7 @@ const Category = (props) => {
 
     return(
         <div className={classes.join(' ')}>
+            <i onClick={() => props.deleteCategory(props.category.id)} className="delete-category fa fa-times"></i>
             <input onChange={(e) => props.editCategoryTitle(e, props.category.id)} maxLength={options.titleMaxLength} placeholder={options.titlePlaceholder} className="category-title input-change-text" type="text" value={props.category.titulo}/>
             <div className="single-deliver show">
                 {lists}

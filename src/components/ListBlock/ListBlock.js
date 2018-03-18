@@ -9,6 +9,7 @@ const ListBlock = (props) => {
         return (
             <Block
                 changeBlockColor={props.changeBlockColor}
+                deleteCategory={props.deleteCategory}
                 createCategory={props.createCategory}
                 editCategoryTitle={props.editCategoryTitle}
                 createList={props.createList}

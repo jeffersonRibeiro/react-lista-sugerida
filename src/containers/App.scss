@@ -65,6 +65,25 @@ body {
         }
 
         .react-category {
+            position: relative;
+
+            &:hover {
+                .delete-category {
+                    display: block;
+                }
+            }
+            .delete-category {
+                display: none;
+                background-color: #eee;
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 5px 10px;
+
+                &:hover {
+                    background-color: #ddd;
+                }
+            }
             &.categoria{
                 border: 2px solid transparent;
                 transition: background-color 0.2s;
@@ -143,6 +162,7 @@ body {
 
                     .no-link {
                         background-color: #d0d0d0!important;
+                        color: #455a6e!important;
                     }
 
                     .list-title {

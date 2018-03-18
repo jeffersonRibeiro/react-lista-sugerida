@@ -19,6 +19,7 @@ const Block = (props) => {
                 <h3 className="title">{props.block.titulo}</h3>
                 <ListCategory
                     categories={props.block.categorias}
+                    deleteCategory={props.deleteCategory}
                     editCategoryTitle={props.editCategoryTitle}
                     createList={props.createList}
                     deleteList={props.deleteList}

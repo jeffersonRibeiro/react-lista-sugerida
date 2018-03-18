@@ -207,6 +207,7 @@ class ListaSugerida extends Component {
         this.changeBlockColor     = this.changeBlockColor.bind(this);
         
         /* Category */
+        this.deleteCategory       = this.deleteCategory.bind(this)
         this.createCategory       = this.createCategory.bind(this)
         this.editCategoryTitle    = this.editCategoryTitle.bind(this)
         
@@ -346,6 +347,17 @@ class ListaSugerida extends Component {
         this.setState({listasSugerida})
     }
 
+    deleteCategory(_id){
+        const listasSugerida = this.state.listasSugerida;
+        listasSugerida.forEach(l => {
+            let i = l.categorias.findIndex(c => c.id === _id);
+            if (i >= 0)
+                l.categorias.splice(i, 1);
+        })
+
+        this.setState({ listasSugerida })
+    }
+
     createCategory(_id){
         const newCategory = {
             id: uuid.v4(),
@@ -353,7 +365,7 @@ class ListaSugerida extends Component {
             listas: []
         }
 
-        let listasSugerida = this.state.listasSugerida;
+        const listasSugerida = this.state.listasSugerida;
         listasSugerida.forEach( l => {
             if(l.id === _id)
                 l.categorias.push(newCategory)
@@ -399,7 +411,8 @@ class ListaSugerida extends Component {
 
                 <ListBlock
                     listasSugerida={this.state.listasSugerida}
-                    changeBlockColor={this.changeBlockColor}                    
+                    changeBlockColor={this.changeBlockColor}  
+                    deleteCategory={this.deleteCategory}                  
                     createCategory={this.createCategory}
                     editCategoryTitle={this.editCategoryTitle}
                     createList={this.createList}
