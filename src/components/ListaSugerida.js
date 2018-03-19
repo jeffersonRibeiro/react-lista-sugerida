@@ -78,10 +78,12 @@ class ListaSugerida extends Component {
         listasSugerida = lastChange.data
 
 
-        const emoji = ['😰', '‍‍‍‍🧙‍', '💩', '‍‍‍‍🧙‍', '‍🧙‍'],
-            randomEmoji = emoji[Math.floor(Math.random() * emoji.length)]
+        const emoji = ['😰', '‍‍‍‍🧙‍', '‍‍‍‍🧙‍', '‍🧙‍']
+        let randomEmoji = emoji[Math.floor(Math.random() * emoji.length)]
 
-
+        if (lastChange.message === 'Importe de lista desfeito')
+            randomEmoji = '💩'
+        
         toast(({ closeToast }) => <div>(Undo) {lastChange.message} <span role="img" aria-label="swag">{randomEmoji}</span></div>, {
             position: toast.POSITION.BOTTOM_RIGHT
         });
@@ -144,7 +146,7 @@ class ListaSugerida extends Component {
 
             this.setState({listasSugerida: imported, modal})
 
-            const emoji = ['😄', '😎', '🧙‍', '🧙‍'],
+            const emoji = ['😄', '😎', '🧙‍'],
                   randomEmoji = emoji[Math.floor(Math.random() * emoji.length)]
             
             
