@@ -78,7 +78,7 @@ class ListaSugerida extends Component {
         listasSugerida = lastChange.data
 
 
-        const emoji = ['💩', '😰', '‍‍‍‍🧙‍', '💩', '‍‍‍‍🧙‍'],
+        const emoji = ['😰', '‍‍‍‍🧙‍', '💩', '‍‍‍‍🧙‍', '‍🧙‍'],
             randomEmoji = emoji[Math.floor(Math.random() * emoji.length)]
 
 
