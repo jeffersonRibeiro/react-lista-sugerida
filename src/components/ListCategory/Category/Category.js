@@ -6,7 +6,7 @@ import List from '../../List/List';
 const Category = (props) => {
 
     const options = {
-        titleMaxLength: 22,
+        titleMaxLength: 45,
         titlePlaceholder: '[Editar título categoria]'
     }
 

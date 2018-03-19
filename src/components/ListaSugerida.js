@@ -1,5 +1,7 @@
 import React,  { Component } from 'react';
 import ReactModal from 'react-modal';
+import { ToastContainer, toast } from 'react-toastify';
+import { css } from 'glamor';
 import uuid from 'uuid';
 
 import Header from './Header/Header';
@@ -72,7 +74,18 @@ class ListaSugerida extends Component {
         if(!changes.length)
             return false
 
-        listasSugerida = changes[changes.length -1].data
+        const lastChange = changes[changes.length - 1]
+        listasSugerida = lastChange.data
+
+
+        const emoji = ['💩', '😰', '‍‍‍‍🧙‍', '💩', '‍‍‍‍🧙‍'],
+            randomEmoji = emoji[Math.floor(Math.random() * emoji.length)]
+
+
+        toast(({ closeToast }) => <div>(Undo) {lastChange.message} <span role="img" aria-label="swag">{randomEmoji}</span></div>, {
+            position: toast.POSITION.BOTTOM_RIGHT
+        });
+
         
         changes.pop();
 
@@ -123,13 +136,24 @@ class ListaSugerida extends Component {
                 })
             })
 
-            this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Lista importada')
+            this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Importe de lista desfeito')
             
             modal.showModal = false
 
             
 
             this.setState({listasSugerida: imported, modal})
+
+            const emoji = ['😄', '😎', '🧙‍', '🧙‍'],
+                  randomEmoji = emoji[Math.floor(Math.random() * emoji.length)]
+            
+            
+            toast(({ closeToast }) => <div>Lista importada! <span role="img" aria-label="swag">{randomEmoji}</span></div>, {
+                position: toast.POSITION.BOTTOM_RIGHT,
+                className: css({
+                    background: "#2c3e50"
+                })
+            });
 
         }
 
@@ -205,7 +229,7 @@ class ListaSugerida extends Component {
             e.preventDefault()
 
 
-            this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Lista editada')
+            this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Edição de lista desfeito')
             
             lista.link = form.listLink.value;
             lista.icone = form.listIconLink.value;
@@ -214,6 +238,7 @@ class ListaSugerida extends Component {
             modal.showModal = false;
 
             this.setState({ listasSugerida, modal })
+
         }
 
 
@@ -258,7 +283,7 @@ class ListaSugerida extends Component {
             
         let listasSugerida = [...this.state.listasSugerida];
 
-        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Lista deletada')
+        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Lista restaurada')
         
         listasSugerida.forEach(b => {
             b.categorias.forEach(c => {
@@ -280,7 +305,7 @@ class ListaSugerida extends Component {
             link: ""
         }
 
-        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Lista criada')
+        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Lista apagada')
         
         let listasSugerida = this.state.listasSugerida;
         listasSugerida.forEach( b => {
@@ -304,7 +329,7 @@ class ListaSugerida extends Component {
     deleteCategory(_id){
         const listasSugerida = [...this.state.listasSugerida];
         
-        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Categoria deletada')
+        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Categoria restaurada')
 
         listasSugerida.forEach(l => {
             let i = l.categorias.findIndex(c => c.id === _id);
@@ -325,7 +350,7 @@ class ListaSugerida extends Component {
 
         const listasSugerida = [...this.state.listasSugerida];
 
-        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Categoria Criada')
+        this.registerChange(JSON.parse(JSON.stringify(this.state.listasSugerida)), 'Categoria apagada')
 
         listasSugerida.forEach( l => {
             if(l.id === _id)
@@ -390,6 +415,10 @@ class ListaSugerida extends Component {
 
                 <Footer/>
 
+                <ToastContainer
+                    autoClose={3500}
+                    hideProgressBar={true}
+                />
             </div>
         )
     }
