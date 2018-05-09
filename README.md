@@ -5,7 +5,9 @@
   <img src="./doc/img/react-lista-sugerida.gif">
 </p>
 
-[Live Demo](https://lista-sugerida-unilever.glitch.me/)
+<p align="center">
+   <a href="https://lista-sugerida-unilever.glitch.me/">Live Demo</a>
+</p>
 
 Just copy and paste this JSON in the import tab to test the application.
 ``` Javascript
