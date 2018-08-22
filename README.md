@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-   <a href="https://lista-sugerida-unilever.glitch.me/" target="_blank">Live Demo</a>
+   <a href="https://react-lista-sugerida.firebaseapp.com/" target="_blank">Live Demo</a>
 </p>
 
 Just copy and paste this JSON in the import tab to test the application.
